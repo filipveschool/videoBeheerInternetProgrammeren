@@ -1,35 +1,73 @@
 package domain;
 
+import converter.MovieEvaluationConverter;
 import domain.person.Actor;
 import helperclasses.MovieEvaluation;
 import helperclasses.MovieGenre;
 import helperclasses.MovieRating;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by filipve on 17/02/2016.
  */
+
+@Entity
 public class Movie {
 
-    private String title;
-    private String director;
-    private int year;
-    private MovieGenre genre;
-    private MovieRating rating;
-    private MovieEvaluation evaluation;
-    private boolean seen;
-    private List<Actor> actors;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotNull
+    @Size(min=3,max = 80)
+    private String title;
+
+    //@NotNull
+    //@Size(min = 3, max=40)
+    @NotEmpty(message = "Please enter the name!")
+    private String director;
+
+    @NotNull
+    private int jaar;
+
+    @Enumerated(EnumType.STRING)
+    private MovieGenre genre;
+
+    @Enumerated(EnumType.STRING)
+    private MovieRating rating;
+
+    //@Convert(converter = MovieEvaluationConverter.class)
+    @Enumerated(EnumType.STRING)
+    private MovieEvaluation evaluation;
+
+    private boolean seen;
+
+    @OneToMany
+    private List<Actor> actors;
+
+public Movie(){
+
+}
+
+    public Movie(String title,String director,int jaar){
+        setTitle(title);
+        setDirector(director);
+        setJaar(jaar);
+    }
+
     public Movie(String title, String director,
-                 int year, MovieGenre genre,
+                 int jaar, MovieGenre genre,
                  MovieRating rating, MovieEvaluation evaluation,
                  boolean seen) {
         setTitle(title);
         setDirector(director);
-        setYear(year);
+        setJaar(jaar);
         setGenre(genre);
         setRating(rating);
         setEvaluation(evaluation);
@@ -73,19 +111,22 @@ public class Movie {
     }
 
     public void setDirector(String director) {
+        /*
         if (director == null || director.isEmpty()) {
             throw new DomainException("director cannot be null or empty");
         }
+        */
+
         this.director = director;
     }
 
-    public int getYear() {
-        return year;
+    public int getJaar() {
+        return jaar;
     }
 
-    public void setYear(int year) {
-        if (year <= 0) throw new IllegalArgumentException("year cannot be 0 or smaller");
-        this.year = year;
+    public void setJaar(int jaar) {
+        if (jaar <= 0) throw new IllegalArgumentException("year cannot be 0 or smaller");
+        this.jaar = jaar;
     }
 
     public MovieGenre getGenre() {
@@ -145,7 +186,7 @@ public class Movie {
     @Override
     public String toString() {
         return "Film: " + getTitle() + " met als regisseur: " + getDirector()
-                + "uitgebracht in het jaar: " + getYear() + "\n met als genre : " + getGenre().toString() +
+                + " - uitgebracht in het jaar: " + getJaar() + "\n" + " met als genre : " + getGenre().toString() +
                 " heeft als rating: " + getRating().toString() + " en als evaluatie : "
                 + getEvaluation().toString()
                 + " en is gezien: " + gezienOfNiet();

@@ -5,11 +5,11 @@ package helperclasses;
  */
 public enum MovieEvaluation {
 
-    ONESTAR("*"),
-    TWOSTARS("**"),
-    THREESTARS("***"),
-    FOURSTARS("****"),
-    FIVESTARS("*****");
+    ONESTAR("1"),
+    TWOSTARS("2"),
+    THREESTARS("3"),
+    FOURSTARS("4"),
+    FIVESTARS("5");
 
     public String getRating() {
         return rating;
@@ -29,4 +29,6 @@ public enum MovieEvaluation {
     public String toString(){
         return getRating().toString();
     }
+
+
 }

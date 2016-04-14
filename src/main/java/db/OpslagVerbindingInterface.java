@@ -61,6 +61,7 @@ public interface OpslagVerbindingInterface {
      */
     public Movie getMovie(String naam, int jaar);
 
+    public Movie getMovieById(int id);
 
     /**
      * CRUD ==> update

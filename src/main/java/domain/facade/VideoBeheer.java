@@ -21,7 +21,7 @@ public class VideoBeheer {
     //private List<Actor> actors;
 
 
-    private OpslagVerbindingInterface videoBeheerDbFake;
+    private OpslagVerbindingInterface videoBeheerDb;
     private DatabaseFactory dbFactory;
 
     public VideoBeheer() {
@@ -31,16 +31,16 @@ public class VideoBeheer {
         Dit is de oude versie, de versie eronder is gemaakt met strategy pattern.
         Door dat in de klasse DatabaseFactory er gewerkt wordt met een create-methode en als type een enum waarde, maken we een nieuw object aan
         door middel van de enum waarde.
-        Dus door DatabaseType.FAKE mee te geven als parameter zeg je dat de klasse videoBeheerDbFake moet worden gebruikt.
+        Dus door DatabaseType.FAKE mee te geven als parameter zeg je dat de klasse videoBeheerDb moet worden gebruikt.
 
         Wil je veranderen van klasse, dan verander je het type gewoon, en wordt een andere klasse gebruikt.
         */
-        //videoBeheerDbFake = new VideoBeheerDbFake();
+        //videoBeheerDb = new VideoBeheerDbFake();
 
-        //videoBeheerDbFake = dbFactory.create(DatabaseType.FAKE);
+        //videoBeheerDb = dbFactory.create(DatabaseType.FAKE);
 
         //static aangeroepen
-videoBeheerDbFake = DatabaseFactory.create(DatabaseType.FAKE);
+videoBeheerDb = DatabaseFactory.create(DatabaseType.FAKE);
 
         //this.movies = new ArrayList<Movie>();
         //this.actors = new ArrayList<Actor>();
@@ -59,7 +59,7 @@ videoBeheerDbFake = DatabaseFactory.create(DatabaseType.FAKE);
      */
 
     public List<Movie> getAllMovies() {
-            return getVideoBeheerDbFake().getAllMovies();
+            return getVideoBeheerDb().getAllMovies();
     }
 
     /**
@@ -68,11 +68,11 @@ videoBeheerDbFake = DatabaseFactory.create(DatabaseType.FAKE);
      * @return een lijst van alle actors die meespelen in 1 film
      */
     public List<Actor> getAllActorsFromOneMovie(Movie movie) {
-        return getVideoBeheerDbFake().getAllActorsFromOneMovie(movie);
+        return getVideoBeheerDb().getAllActorsFromOneMovie(movie);
     }
 
     public List<Actor> getAllActors() {
-        return getVideoBeheerDbFake().getAllActors();
+        return getVideoBeheerDb().getAllActors();
     }
 
 
@@ -118,72 +118,72 @@ videoBeheerDbFake = DatabaseFactory.create(DatabaseType.FAKE);
      * CRUD ==> create
      */
     public void addMovie(Movie movie) {
-        getVideoBeheerDbFake().addMovie(movie);
+        getVideoBeheerDb().addMovie(movie);
     }
 
     /**
      * CRUD ==> read
      */
     public Movie getMovie(String naam, int jaar) {
-        return getVideoBeheerDbFake().getMovie(naam, jaar);
+        return getVideoBeheerDb().getMovie(naam, jaar);
     }
 
     /**
      * CRUD ==> update
      */
     public void updateMovie(Movie movie, Movie oldMovie) {
-        getVideoBeheerDbFake().updateMovie(movie, oldMovie);
+        getVideoBeheerDb().updateMovie(movie, oldMovie);
     }
 
     /**
      * CRUD ==> delete
      */
     public void deleteMovie(Movie movie) {
-        getVideoBeheerDbFake().deleteMovie(movie);
+        getVideoBeheerDb().deleteMovie(movie);
     }
 
     /**
      * CRUD ==> create
      */
     public void addActor(Actor actor) {
-        getVideoBeheerDbFake().addActor(actor);
+        getVideoBeheerDb().addActor(actor);
     }
 
     /**
      * CRUD ==> create 2
      */
     public void addActor(Actor actor, Movie movie) {
-        getVideoBeheerDbFake().addActor(actor, movie);
+        getVideoBeheerDb().addActor(actor, movie);
     }
 
     /**
      * CRUD ==> read
      */
     public Actor getActor(String voornaam, String familieNaam) {
-        return getVideoBeheerDbFake().getActor(voornaam, familieNaam);
+        return getVideoBeheerDb().getActor(voornaam, familieNaam);
     }
 
     /**
      * CRUD ==> update
      */
     public void updateActor(Actor actor, Actor oldActor) {
-        getVideoBeheerDbFake().updateActor(actor, oldActor);
+        getVideoBeheerDb().updateActor(actor, oldActor);
     }
 
     /**
      * CRUD ==> delete
      */
     public void deleteActor(Actor actor) {
-        getVideoBeheerDbFake().deleteActor(actor);
+        getVideoBeheerDb().deleteActor(actor);
 
     }
 
 
-    public OpslagVerbindingInterface getVideoBeheerDbFake() {
-        return videoBeheerDbFake;
+    public OpslagVerbindingInterface getVideoBeheerDb() {
+        return videoBeheerDb;
     }
 
-    public void setVideoBeheerDbFake(OpslagVerbindingInterface videoBeheerDbFake) {
-        this.videoBeheerDbFake = videoBeheerDbFake;
+    public void setVideoBeheerDb(OpslagVerbindingInterface videoBeheerDb) {
+        this.videoBeheerDb = videoBeheerDb;
     }
 }

@@ -52,8 +52,10 @@ public class VideoBeheerTest extends TestCase {
                 false);
         //System.out.println(movie.toString());
 
-        actor = new Actor("Ian","Mc Kellen",new Age(LocalDate.of(1939, Month.MAY,25)), GenderPerson.MALE);
-        actor2 = new Actor("Martin","Freeman",new Age(LocalDate.of(1971,Month.SEPTEMBER,8)), GenderPerson.MALE);
+        //actor = new Actor("Ian","Mc Kellen",new Age(LocalDate.of(1939, Month.MAY,25)), GenderPerson.MALE);
+        actor = new Actor("Ian","Mc Kellen", 20,4,1994, true);
+        //actor2 = new Actor("Martin","Freeman",new Age(LocalDate.of(1971,Month.SEPTEMBER,8)), GenderPerson.MALE);
+        actor2 = new Actor("Martin","Freeman",20,5,1995, true);
 
     }
 
@@ -114,19 +116,19 @@ public class VideoBeheerTest extends TestCase {
     public void test_get_movie_met_parameters_titel_en_jaar() throws Exception {
         vdb.addMovie(movie);
         assertEquals(title,vdb.getMovie(title,year).getTitle());
-        assertEquals(year,vdb.getMovie(title,year).getYear());
+        assertEquals(year,vdb.getMovie(title,year).getJaar());
     }
 
     @Test
 public void test_update_movie() throws Exception{
 
         Movie movie2 = movie;
-        movie2.setYear(1993);
+        movie2.setJaar(1993);
         vdb.updateMovie(movie2,movie);
         List<Movie> movieList = vdb.getAllMovies();
         printResultaatLijst(movieList);
 
-        assertEquals(1993,vdb.getAllMovies().get(0).getYear());
+        assertEquals(1993,vdb.getAllMovies().get(0).getJaar());
 
     }
 
@@ -167,12 +169,14 @@ vdb.addActor(actor,movie);
     @Test
     public void test_update_actor() throws Exception{
 Actor act = actor;
-        act.setGender(GenderPerson.FEMALE);
+        //act.setGender(GenderPerson.FEMALE);
+        act.setGeslacht(true);
         vdb.updateActor(act,actor);
         List<Actor> actorList = vdb.getAllActors();
         printResultaatLijst(actorList);
 
-        assertEquals(GenderPerson.FEMALE,vdb.getAllActors().get(0).getGender());
+       // assertEquals(GenderPerson.FEMALE,vdb.getAllActors().get(0).getGender());
+        assertEquals(false,vdb.getAllActors().get(0).isGeslacht());
     }
 
     @Test

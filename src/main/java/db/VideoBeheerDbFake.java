@@ -112,7 +112,19 @@ public class VideoBeheerDbFake implements OpslagVerbindingInterface {
         Movie returnMovie = null;
 
         for (Movie movie : beheer.values()) {
-            if (movie.getYear() == jaar && movie.getTitle() == naam) {
+            if (movie.getJaar() == jaar && movie.getTitle() == naam) {
+                return movie;
+            }
+        }
+
+        return returnMovie;
+    }
+
+    public Movie getMovieById(int id) {
+        Movie returnMovie = null;
+
+        for (Movie movie : beheer.values()) {
+            if (movie.getId() == id) {
                 return movie;
             }
         }
